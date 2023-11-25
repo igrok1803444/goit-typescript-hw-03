@@ -13,8 +13,8 @@ class Person {
     constructor( private key: Key) {
       
     }
-    getKey(): number{
-        return this.key.getSignature();
+    getKey(): Key{
+        return this.key;
     }
 }
  
@@ -26,21 +26,19 @@ abstract class House {
     }
     comeIn(person: Person): void{
         if (this.door) {
-            this.tenants.push()
+            this.tenants.push(person)
         }
     }
 
-    abstract  OpenDoor(key: number): void
+    abstract  OpenDoor(key: Key): void
 }
 
 class MyHouse extends House{
 
-    constructor( key: Key) {
-        super(key)
-    }
+  
 
-    OpenDoor( key: number): void {
-        if (key === this.key.getSignature()) {
+    OpenDoor( key: Key): void {
+        if (key.getSignature() === this.key.getSignature()) {
             this.door = true
         }
     }
